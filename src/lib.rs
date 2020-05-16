@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 use web_sys::console;
 
+mod gameoflife;
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
 // allocator.
@@ -22,6 +23,9 @@ pub fn main_js() -> Result<(), JsValue> {
 
     // Your code goes here!
     console::log_1(&JsValue::from_str("Hello world!"));
+    let mut game = gameoflife::GameOfLife::new();
+    game.set_alive(1,1);
+    console::log_1(&JsValue::from_str(&game.pretty_state()));
 
     Ok(())
 }
