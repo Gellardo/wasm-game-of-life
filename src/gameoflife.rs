@@ -1,9 +1,12 @@
 use std::ops::AddAssign;
 
-const SIZE: usize = 8;
+use wasm_bindgen::prelude::*;
+
+const SIZE: usize = 16;
 
 type Universe = [[u8; SIZE]; SIZE];
 
+#[wasm_bindgen]
 #[derive(Debug)]
 pub struct GameOfLife {
     state: Universe,
@@ -13,7 +16,7 @@ pub struct GameOfLife {
 
 impl GameOfLife {
     pub fn new() -> Self {
-        return GameOfLife { state: [[0; 8]; 8], last: [[0; 8]; 8], ticks: 0 };
+        return GameOfLife { state: [[0; SIZE]; SIZE], last: [[0; SIZE]; SIZE], ticks: 0 };
     }
 
     pub fn set_alive(&mut self, x: usize, y: usize) {
@@ -64,6 +67,20 @@ impl GameOfLife {
         let mut s = "".to_string();
         for line in &self.state {
             s.add_assign(&format!("{:?}\n", line))
+        }
+        s
+    }
+
+    pub fn prettier_state(&self) -> String {
+        let mut s = "".to_string();
+        for line in &self.state {
+            for cell in line {
+                s += match cell {
+                    1 => "█",
+                    _ => "░",
+                }
+            }
+            s += "\n"
         }
         s
     }
