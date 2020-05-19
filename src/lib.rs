@@ -38,13 +38,3 @@ pub fn game() -> GameOfLife {
     game.set_alive(3, 3);
     game
 }
-
-#[wasm_bindgen]
-pub fn tick(mut game: &mut GameOfLife) {
-    game.tick();
-}
-
-#[wasm_bindgen]
-pub fn to_string(game: &GameOfLife) -> String {
-    game.prettier_state()
-}

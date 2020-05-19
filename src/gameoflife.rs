@@ -14,6 +14,7 @@ pub struct GameOfLife {
     ticks: u32,
 }
 
+#[wasm_bindgen]
 impl GameOfLife {
     pub fn new() -> Self {
         return GameOfLife { state: [[0; SIZE]; SIZE], last: [[0; SIZE]; SIZE], ticks: 0 };
