@@ -33,6 +33,11 @@ impl GameOfLife {
         self.state.iter().all(|line| line.iter().all(|cell| cell == &0u8))
     }
 
+    pub fn multi_tick(&mut self, ticks: u16) {
+        for _ in 0..ticks {
+            self.tick()
+        }
+    }
     pub fn tick(&mut self) {
         self.last = self.state;
 
