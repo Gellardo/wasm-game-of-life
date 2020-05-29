@@ -1,8 +1,12 @@
 "use strict";
 import( "../pkg/index.js" ).then(wasm => game(wasm)).catch(console.error);
 
+async function a_perform_benchmark(wasm) {
+    perform_benchmark(wasm)
+}
 
-function benchmark(wasm) {
+function perform_benchmark(wasm) {
+    console.log("start benchmark")
     let iterations = 1000;
 
     const g = wasm.game()
@@ -52,7 +56,13 @@ function hashFnv32a(str, asString, seed) {
 }
 
 function game(wasm) {
-    benchmark(wasm)
+    const bench_button = document.getElementById("run_benchmark")
+    bench_button.addEventListener("click", () => {
+        bench_button.disable = true;
+        a_perform_benchmark(wasm).then(() => bench_button.disable = false);
+    }, false)
+    perform_benchmark(wasm)
+
     const gameElement = document.getElementById("game")
     // const g = wasm.game()
     const g = init_game(16)
