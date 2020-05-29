@@ -1,5 +1,6 @@
 use std::ops::AddAssign;
 
+use wasm_bindgen::__rt::core::mem;
 use wasm_bindgen::prelude::*;
 
 const SIZE: usize = 16;
@@ -39,7 +40,7 @@ impl GameOfLife {
         }
     }
     pub fn tick(&mut self) {
-        self.last = self.state;
+        mem::swap(&mut self.state, &mut self.last);
 
         for x in 0..self.last.len() {
             for y in 0..self.last[x].len() {
