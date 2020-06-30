@@ -127,21 +127,6 @@ mod tests {
     }
 
     #[test]
-    fn test_tick_cross() {
-        let mut game = GameOfLife::new();
-        // a line flips between horizontal and vertical
-        game.set_alive(1, 1);
-        game.set_alive(1, 2);
-        game.set_alive(1, 3);
-        game.set_alive(2, 2);
-        game.set_alive(0, 2);
-        while !game.is_dead() {
-            game.tick();
-            println!("{}----------", game.pretty_state());
-        }
-    }
-
-    #[test]
     fn test_tick_glider() {
         let mut game = GameOfLife::new();
         // a line flips between horizontal and vertical
