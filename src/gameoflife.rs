@@ -93,6 +93,7 @@ impl GameOfLife {
     }
 }
 
+#[cfg(test)]
 mod tests {
     use super::*;
 
